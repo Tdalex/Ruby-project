@@ -22,3 +22,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+Avant de faire Rails server :
+
+*Installer NodeJs ou decommenter RubyRacer dans Gemfile
+
+*Faire un bundle install dans le terminal
+
+* Migrer la BDD avec rails db:migrate
+
