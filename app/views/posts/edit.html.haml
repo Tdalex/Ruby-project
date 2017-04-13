@@ -1,0 +1,8 @@
+.text-center
+  = image_tag @post.image.url(:medium)
+= render 'form'
+.text-center.edit-links
+  = link_to "Delete Post", post_path(@post), method: :delete, data: { confirm: "Sur de chez Sur ?" }
+  |
+  = link_to "Cancel", posts_path
+  |
