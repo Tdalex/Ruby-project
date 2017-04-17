@@ -40,9 +40,11 @@ gem 'paperclip'
 
 gem 'simple_form'
 
-gem 'bootstrap-sass'
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'devise'
+
+gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
 
 
 
