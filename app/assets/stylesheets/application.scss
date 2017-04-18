@@ -28,7 +28,7 @@ html {
 .registration-bg {
   padding-top: 4em;
   height: 100%;
-  background-image: image-url('trolltunga.jpg');
+  background-image: image-url('sean.jpg');
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -38,7 +38,7 @@ html {
 .login-bg {
   padding-top: 4em;
   height: 100%;
-  background-image: image-url('trolltunga.jpg');
+  background-image: image-url('thomas.jpg');
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -133,6 +133,15 @@ html {
   margin: 0 auto;
   max-width: 642px;
   width: 100%;
+}
+
+.comments {
+  .paginator {
+    margin: 0.5em;
+    .more-comments {
+      color: #A5A7AA;
+    }
+  }
 }
 
 .post {
