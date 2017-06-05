@@ -44,6 +44,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'devise'
 
+gem 'acts_as_votable', '~> 0.10.0'
+
 gem 'kaminari', :git => "git://github.com/amatsuda/kaminari.git", :branch => 'master'
 
 
