@@ -1,13 +1,9 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
-  before_action :authenticate_user!
-  before_action :owned_post, only: [:edit, :update, :destroy]  
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :like, :unlike]
+  before_action :owned_post, only: [:edit, :update, :destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC').page params[:page]
-  end
-
-  def show
+    @posts = Post.of_followed_users(current_user.following).order('created_at DESC').page params[:page]
   end
 
   def new
@@ -16,58 +12,83 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-
     if @post.save
-      flash[:success] = "Your post has been created!"
-      redirect_to posts_path
+      flash[:success] = "Votre post a bien été uploadé!"
+      redirect_to @post
     else
-      flash[:alert] = "Your new post couldn't be created!  Please check the form."
+      flash.now[:alert] = "Votre post n'a pas pu être validé. Regardez le formulaire."
       render :new
     end
   end
 
+  def show
+
+  end
+
   def edit
+
   end
 
   def update
     if @post.update(post_params)
-      flash[:success] = "Post updated."
-      redirect_to posts_path
+      flash[:success] = "Votre post à bien été mis à jour"
+      redirect_to post_path(@post)
     else
-      flash[:alert] = "Update failed.  Please check the form."
+      flash.now[:alert] = "Update failed.  Please check the form."
       render :edit
     end
   end
 
   def destroy
     @post.destroy
-    flash[:success] = "Your post has been deleted."
-    redirect_to root_path
+    redirect_to posts_path
   end
 
   def like
     if @post.liked_by current_user
-        respond_to do |format|
-          format.html { redirect_to :back }
-          format.js
-        end
+      create_notification @post
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
       end
+    end
+  end
+
+  def unlike
+    if @post.unliked_by current_user
+      respond_to do |format|
+        format.html { redirect_to :back }
+        format.js
+      end
+    end
+  end
+
+  def browse
+    @posts = Post.all.order('created_at DESC').page params[:page]
   end
 
   private
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def post_params
-    params.require(:post).permit(:image, :caption)
-  end
+    def post_params
+      params.require(:post).permit(:image, :caption)
+    end
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
+    def owned_post
+      unless current_user == @post.user
+        flash[:alert] = "Cette publication ne vous appartient pas!"
+        redirect_to root_path
+      end
+    end
 
-  def owned_post  
-  unless current_user == @post.user
-    flash[:alert] = "That post doesn't belong to you!"
-    redirect_to root_path
-  end
-end
+  def create_notification(post)
+      return if post.user.id == current_user.id
+      Notification.create(user_id: post.user.id,
+                          notified_by_id: current_user.id,
+                          post_id: post.id,
+                          identifier: post.id,
+                          notice_type: 'like')
+    end
 end

@@ -1,6 +1,5 @@
 = render 'form'
 .text-center.edit-links
-  = link_to "Delete Post", post_path(@post), method: :delete, data: { confirm: "Sur de chez Sur ?" }
+  = link_to "Effacer Post", post_path(@post), method: :delete, data: { confirm: "Êtes vous sur d'effacer ce post?" }
   |
-  = link_to "Cancel", posts_path
-  |
+  = link_to "cancel", posts_path

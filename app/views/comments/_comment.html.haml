@@ -1,8 +1,8 @@
-#comment
+.comment{id: "comment_#{comment.id}"}
   .user-name
     = link_to comment.user.user_name, profile_path(comment.user.user_name)
-  .comment-content
-    = comment.content
-  - if comment.user == current_user
-    = link_to post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" }, remote: true do
-      %span(class="glyphicon glyphicon-remove delete-comment")
+    .comment-content
+      = comment.content
+    - if comment.user == current_user
+      = link_to post_comment_path(post, comment), method: :delete, remote: true, data: { confirm: "Êtes vous sur ?" } do
+        %span(class="glyphicon glyphicon-remove delete-comment")

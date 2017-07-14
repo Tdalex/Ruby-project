@@ -1,11 +1,25 @@
-@import "bootstrap-sprockets";
- @import "bootstrap";
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
 
-html {  
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+html {
   height: 100%;
 }
 
-body {  
+body {
   height: 100%;
   background-color: #fafafa;
   font-family: proxima-nova, 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -40,23 +54,6 @@ body {
 }
 
 /* ## POST CUSTOMISATIONS ## */
-
-.notification-dropdown {
-  margin-top: 10px;
-  button {
-    border: none;
-  }
-}
-
-.notification-index-list {
-  margin-top: 5em;
-  list-style: none;
-  li {
-    margin-top: 1em;
-    background-color: white;
-    padding: 1em;
-  }
-}
 
 .posts-wrapper {
   padding-top: 40px;
@@ -119,7 +116,7 @@ body {
       font-weight: 500;
       margin-right: 0.3em;
     }
-    .delete-comment {
+    .delete-comment-icon {
       float: right;
       color: #515151;
     }
@@ -286,6 +283,7 @@ body {
 .likes {
   margin-top: 20px;
   margin-bottom: 7px;
+  color: #4b4f54;
 }
 
 .like {
@@ -296,4 +294,52 @@ body {
 .like-button a:hover, a:focus {
   text-decoration: none;
   color: red;
+}
+
+.notification-dropdown {
+  margin-top: 10px;
+  button {
+    border: none;
+  }
+}
+
+.notification-index-list {
+  margin-top: 5em;
+  list-style: none;
+  li {
+    margin-top: 1em;
+    padding: 1em;
+  }
+
+  li.notification-read-type {
+    background-color: white;
+  }
+
+  li.notification-unread-type {
+    background-color: #DADADA;
+  }
+}
+
+.follow-button {
+  text-transform: uppercase;
+  border-color: #4090db;
+  color: #4090db;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #2D6396;
+    color: #2D6396;
+  }
+}
+
+.unfollow-button {
+  text-transform: uppercase;
+  border-color: #66bd2b;
+  background-color: #66bd2b;
+  color: white;
+  margin-left: 20px;
+  &:visited, &:focus, &:hover {
+    border-color: #47821F;
+    background-color: #47821F;
+    color: white;
+  }
 }

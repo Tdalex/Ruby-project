@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170702153733) do
+ActiveRecord::Schema.define(version: 20170617080512) do
 
   create_table "comments", force: :cascade do |t|
+    t.text     "content"
     t.integer  "user_id"
     t.integer  "post_id"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer  "following_id", null: false
+    t.integer  "follower_id",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id", "follower_id"], name: "index_follows_on_following_id_and_follower_id", unique: true
+    t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -69,7 +79,6 @@ ActiveRecord::Schema.define(version: 20170702153733) do
     t.text     "bio"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["user_name"], name: "index_users_on_user_name", unique: true
   end
 
   create_table "votes", force: :cascade do |t|
